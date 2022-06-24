@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="row">
+			<div class="col-sm-4" th:each="product : ${productList}">
+				<div class="card mt-4">
+				<img th:src="${product.image}" class="card-img-top" alt="Product Image">
+					<div class="card-body">
+						<h5 th:text="${product.productName}" class="card-title"></h5>
+						<p th:text="${product.productDescription}" class="card-text"></p>
+						<p th:text="'$ '+${product.productPrice}" class="card-text"></p>
+						<a href="#" th:href="@{'~/profile/addToCart/' + ${product.productId}}" class="btn btn-primary">AddToCart</a>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments.html :: headerfiles">
+<title>Sign Up</title>
+</head>
+<style>
+body {
+background:url('https://t3.ftcdn.net/jpg/04/52/47/80/360_F_452478014_COmUVmJfCTbfm9SzNB1dJAuPqnwiArGz.jpg');
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-size:cover;
+}
+</style>
+<body>
+	<div class="container">
+		<div
+			style="width: 600px; margin-left: auto; margin-right: auto; margin-top: 24px; padding: 24px;">
+			<div class="card">
+				<div class="card-header">
+					<i class="fa fa-user"></i> Sign Up
+				</div>
+				<div class="card-block" style="padding: 24px;">
+					<form th:action="@{/signup}" method="post">
+						<fieldset>
+						
+							<div class="form-group">
+								<label for="firstName"style="font-size:20px;">FirstName</label> <input type="text"
+									class="form-control" id="firstName" name="firstName"
+									placeholder="First Name">
+							</div>
+							
+							<div class="form-group">
+								<label for="lastName"style="font-size:20px;">LastName</label> <input type="text"
+									class="form-control" id="lastName" name="lastName"
+									placeholder="Last Name">
+							</div>
+							
+							<div class="form-group">
+								<label for="email"style="font-size:20px;">Email</label> <input type="email"
+									class="form-control" id="email" name="email"
+									placeholder="Email">
+							</div>
+
+							<div class="form-group">
+								<label for="password"style="font-size:20px;">Password</label> <input type="password"
+									class="form-control" id="password" name="password"
+									placeholder="Password">
+							</div>
+							
+							<input type="hidden" class="form-control" id="role" name="role"
+									th:value="USER">
+
+							<div class="form-actions" style="margin-top: 12px;">
+								<button type="submit" class="btn btn-success">Sign Up</button>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4070f4;
+}
+
+.container{
+    position: relative;
+    max-width: 600px;
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 0 20px;
+}
+.container .card .card-header{
+    position: relative;
+    font-size: 27px;
+    font-weight: 600;
+}
+.form-group .form-control{
+    position: relative;
+    height: 30px;
+    width: 100%;
+    margin-top: 20px;
+}
+</style>
+</body>
+</html>
