@@ -1,0 +1,423 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin Dashboard</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body background="https://img.freepik.com/free-photo/empty-living-room-with-blue-sofa-plants-table-empty-white-wall-background-3d-rendering_41470-1786.jpg?w=2000.jpg">
+
+<section>
+	<div class="sidebar">
+		<h1 class="logo">FurniStyle.</h1>
+
+		<ul class="nav">
+			<li><a th:href="@{/manager/category-form}"><i class="fa fa-windows"></i> Category</a></li>
+			<li ><a th:href="@{/manager/product-form}"><i class="fa fa-cube"></i>Product</a></li>
+			<li><a th:href="@{/events}"><i class="fa fa-calendar"></i> Events</a></li>
+			<li><a href="#"><i class="fa fa-shopping-bag"></i>Order</a></li>
+			<li><a href="#"><i class="fa fa-database"></i> Stock</a></li>
+			<li class="active"><a th:href = "@{/showCoupons}"><i class="fa fa-tag"></i> Coupons</a></li>
+
+		</ul>
+
+			<ul class="social">
+				<li><a href="#">Facebook</a></li>
+				<li><a href="#">Twitter</a></li>
+				<li><a href="#">Google</a></li>
+			</ul>
+		
+
+	</div>
+	<div class="main">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>product Management System</title>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+</head>
+<body>
+<div class="container my-2">
+	<h1>Coupon List</h1>
+	
+	
+	<a th:href = "@{/showNewCouponForm}" class="btn btn-primary btn-sm mb-3"> Add Coupon </a>
+	<a th:href = "@{/index}" class="btn btn-primary btn-sm mb-3"> Home</a>
+		<table border="1" class = "table table-striped table-responsive-md">
+			<thead>
+				<tr>
+					<th>
+						<a th:href="@{'/page/' + ${currentPage} + '?sortField=productName&sortDir=' + ${reverseSortDir}}">
+							Coupon Name</a>
+					</th>
+					<th>
+					<a th:href="@{'/page/' + ${currentPage} + '?sortField=productCategory&sortDir=' + ${reverseSortDir}}">
+							Coupon Discount(%)</a>
+					</th>
+					<th>
+					<a th:href="@{'/page/' + ${currentPage} + '?sortField=productDescription&sortDir=' + ${reverseSortDir}}">
+							category id</a>
+					</th>
+					<th>
+					<a th:href="@{'/page/' + ${currentPage} + '?sortField=productPrice&sortDir=' + ${reverseSortDir}}">
+							description</a>
+					</th>
+					  <th>
+					<a th:href="@{'/page/' + ${currentPage} + '?sortField=productStock&sortDir=' + ${reverseSortDir}}">
+							Event id</a>
+					</th>
+					
+					<th> Actions </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="coupon : ${listCoupons}">
+					<td th:text="${coupon.couponName}"></td>
+					<td th:text="${coupon.couponDiscount}"></td>
+					<td th:text="${coupon.categoryId}"></td>
+					<td th:text="${coupon.couponDis}"></td>
+					<td th:each="event:${listEvent}"
+						th:if="${event.Eid}==${coupon.eventId}"
+						th:text = "${event.eventName}">
+					</td>
+					
+					<td> <a th:href="@{/showFormForUpdateCoupon/{id}(id=${coupon.cid})}" class="btn btn-primary">Update</a>
+					    <a th:href="@{/deleteCoupon/{id}(id=${coupon.cid})}" class="btn btn-danger">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<div th:if = "${totalPages > 1}">
+			<div class = "row col-sm-10">
+				<div class = "col-sm-2">
+					Total Rows: [[${totalItems}]] 
+				</div>
+				<div class = "col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+				</div>
+				<div class = "col-sm-1">
+					<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+					<span th:unless="${currentPage < totalPages}">Next</span>
+				</div>
+				
+				 <div class="col-sm-1">
+    				<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+					<span th:unless="${currentPage < totalPages}">Last</span>
+   				 </div>
+			</div>
+		</div>
+	</div>
+	<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+:root{
+	--blue:#71cbe3;
+	--white:#fff;
+	--black:#000;
+	--lightblue:#b3bbd1;
+	--gray:#e5e5e5;
+}
+*{margin: 0px;  padding: 0px; font-family: 'Montserrat', sans-serif;}
+body{height: 100vh;}
+.sidebar{
+	width: 20%;
+	float: left;
+	background: var(--blue);
+	height: 100vh;
+	position: relative;
+}
+.main{width: 75%;float: left;height: 90vh; padding: 30px;}
+.logo{text-align: center;color: var(--white); margin-top: 50px; font-weight: 800;
+margin-bottom: 50px;}
+.nav{margin-left: 40px;}
+.nav li{list-style: none; padding: 16px 19px;}
+.nav li i{ margin-right: 10px;}
+.nav li a{color: var(--white); text-decoration: none; font-weight: 600;}
+.active{
+	background:var(--white);
+	border-radius: 27px;
+	position: relative;
+}
+.nav > .active::before, .nav > .active::after {
+     content: "";
+     position: absolute;
+}
+.nav > li{
+    border-radius: 60px 0 0 60px;
+        width: 92%;
+    margin-left: -15px;
+}
+.nav > .active::before {
+    top: -80px;
+    right: 0px;
+    height: 80px;
+    width: 62px;
+    border-bottom-right-radius: 80px;
+    box-shadow: 0 40px 0 0 var(--white);
+    transform: rotateZ(360deg);
+}
+.nav > .active::after {
+    top: 51px;
+    right: 0px;
+    height: 80px;
+    width: 62px;
+    border-top-right-radius: 80px;
+    box-shadow: 0 -40px 0 0 var(--white);
+    transform: rotateZ(360deg);
+    
+}
+.active a{color: var(--blue)!important;}
+.social{position: absolute;bottom: 10px; left: 20px;}
+.social li{
+	list-style: none;
+	float: left;
+	padding: 10px;
+}
+.social li a{font-size: 14px; color: var(--white);}
+.clearfix{clear: both;}
+.col-6{width: 50%; float: right;}
+.hicon{margin-right: 20px; font-size: 22px!important;position: relative;}
+.hicon:nth-child(1):after{
+	content: '';
+	position:absolute;
+	width: 7px;
+	height: 7px;
+	background: red;
+	border-radius: 10px;
+	left: 13px;
+    top: 7px;
+    transform: scale(0.5);
+	box-shadow: 0 0 0 0 rgba(255, 82, 82, 1);
+	animation: pulse-red 2s infinite;
+	cursor: pointer;
+
+}
+
+@keyframes pulse-red {
+	0% {
+		transform: scale(0.85);
+		box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7);
+	}
+	
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 25px rgba(255, 82, 82, 0);
+	}
+	
+	100% {
+		transform: scale(0.85);
+		box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
+	}
+}
+.user{
+	background:var(--lightblue);
+    padding: 5px;
+    width: 30px;
+    margin-bottom: -11px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.profile-div{
+  background-color: var(--gray);
+  width: 140px;
+  border: 1px solid #ddd;
+  padding: 10px 0px;
+  right: 2%;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 9;
+  display: none;
+  top: 84px;
+  text-align: right;
+}
+.profile-div:after{
+  content: '';
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    background-color: var(--gray);
+    top: -6px;
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    transform: rotate(45deg);
+    right: 10%;
+}
+.profile-div p{margin: 0px;padding: 10px 20px;}
+.profile-div p:hover{
+  margin: 0px;
+    padding: 10px 20px;
+    background-color: var(--blue);
+    border-radius: 0px;
+    color: var(--white);
+}
+.notification-div{
+  background-color: var(--gray);
+  width: 246px;
+  border: 1px solid #ddd;
+  padding: 10px 0px;
+  right: 9.4%;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 9;
+  display: none;
+  top: 84px;
+  text-align: left;
+}
+.notification-div:after{
+  content: '';
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    background-color: var(--gray);
+    top: -6px;
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    transform: rotate(45deg);
+    right: 10%;
+}
+.notification-div p{margin: 0px;padding: 10px 20px;}
+.notification-div p:hover{
+  margin: 0px;
+    padding: 10px 20px;
+    background-color: var(--blue);
+    border-radius: 0px;
+    color: var(--white); 
+}
+.search{ padding: 5px; display: none; outline: none; border:none;
+	border-bottom: 1px solid black;
+}
+table {
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+  border-spacing: 0 15px;
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd!important;
+  padding: .35em;
+  margin-bottom: 10px;
+}
+
+table th,
+table td {
+  padding: 1.5em;
+  text-align: left;
+
+}
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.tab-img{
+	display: inline-block;
+    width: 30px;
+    vertical-align: middle;
+    border: 1px solid #000;
+    border-radius: 18px;
+    margin-right: 8px;
+}
+.ticon{
+	padding: 5px;
+	background: var(--gray);
+	border-radius: 4px;
+	width: 15px;
+	height: 15px;
+	text-align: center;
+}
+.pe{
+	content: '';
+	position:absolute;
+	width: 7px;
+	height: 7px;
+	background: red;
+	border-radius: 10px;
+	left: 10px;
+    top: 37px;
+    transform: scale(0.5);
+	box-shadow: 0 0 0 0 rgba(255, 82, 82, 1);
+	animation: pulse-red 2s infinite;
+	cursor: pointer;
+}
+.de{
+	content: '';
+	position:absolute;
+	width: 7px;
+	height: 7px;
+	background: green;
+	border-radius: 10px;
+	left: 10px;
+    top: 37px;
+    transform: scale(0.5);
+	box-shadow: 0 0 0 0 rgba(255, 82, 82, 1);
+	animation: pulse-green 2s infinite;
+	cursor: pointer;
+}
+@keyframes pulse-green {
+	0% {
+		transform: scale(0.85);
+		box-shadow: 0 0 0 0 rgba(82, 255, 82, 0.7);
+	}
+	
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 25px rgba(82, 255, 82, 0);
+	}
+	
+	100% {
+		transform: scale(0.85);
+		box-shadow: 0 0 0 0 rgba(82, 255, 82, 0);
+	}
+}
+.active-tr{
+	background: var(--blue);
+	color: var(--white);
+}
+.active-tr .ticon{
+	background: #e5e5e54f;
+}
+</style>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){
+  $(".user").click(function(){
+    $(".profile-div").toggle(1000);
+  });
+  $(".hicon:nth-child(1)").click(function(){
+    $(".notification-div").toggle(1000);
+  });
+  $(".sicon").click(function(){
+    $(".search").toggle(1000);
+  });
+});
+</script>
+
+<script type="text/javascript">
+	$('li').click(function(){
+    $('li').removeClass("active");
+    $(this).addClass("active");
+});
+
+
+
+	
+</script>
+</body>
+</html>

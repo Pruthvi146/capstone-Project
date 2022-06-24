@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="fragments.html :: headerfiles">
+ <link th:href="@{~/css/stylehome.css}" rel="stylesheet">
+ <link th:href="@{~/css/main.css}" rel="stylesheet">
+</head>
+
+<style>
+body {  
+  background-image: url("https://blog.bizvibe.com/wp-content/uploads/2020/03/top-10-furniture-brands.jpg");  
+  background-attachment: fixed;    
+  background-repeat: no-repeat;  
+  background-size: cover;  
+}  
+
+</style>
+<body style="background-color:white;">
+	<header th:insert="fragments.html :: nav"></header>
+	<div class="mx-auto" style="width: 200px; padding-top:50px;padding-right:50px;padding-bottom:50px;padding-left:50px;">
+  Centered element
+</div>
+
+	<div class="container">
+		<section>
+
+		<div class="d-flex justify-content-start p-2">
+			<!--  <a class="list-group-item mr-2" href="#" th:href="@{/allProduct}">All
+				Product</a> 
+			<a class="list-group-item mr-2"	th:each="category : ${categoryList}"
+				th:text="${category.categoryName}" href="#" th:href="@{'/getProducts/' + ${category.categoryId}}"></a>-->
+		</div>
+
+		  <div class="row">
+			<div class="col-sm-4" th:each="product : ${productList}">
+				<div class="card mt-4" style="width:28rem;height:46rem">
+				<img th:src="${product.image}" class="card-img-top" alt="Product Image" style="width:28rem;height:36rem">
+					<div class="card-body">
+						<h5 th:text="${product.productName}" class="card-title"></h5>
+						<p th:text="${product.productDescription}" class="card-text"></p>
+						<p th:text="'Rs. '+${product.productPrice}" class="card-text"></p>
+						<a href="#" th:href="@{'~/profile/addToCart/' + ${product.productId}}" class="btn btn-primary"><i class="fas fa-shopping-cart"></i></a>
+					</div>
+				</div>
+			</div>
+		</div> 
+		<!-- <div class = "product">
+                        <div class = "product-content">
+                            <div class = "product-img">
+                                <img th:src="${product.image}" class="card-img-top" alt="Product Image"></div>
+                            <div class = "product-btns">
+                            <a href="#" th:href="@{'~/profile/addToCart/' + ${product.productId}}" class="btn btn-primary">AddToCart</a>
+		
+                                
+                                    <span><i class = "fas fa-plus"></i></span>
+                             
+                               
+                                    <span><i class = "fas fa-shopping-cart"></i></span>
+             
+                            </div>
+                        </div>
+		<div class = "product-info">
+                            <div class = "product-info-top">
+                                <h2 class = "sm-title">MintWud</h2>
+                                <div class = "rating">
+                                    <span><i class = "fas fa-star"></i></span>
+                                    <span><i class = "fas fa-star"></i></span>
+                                    <span><i class = "fas fa-star"></i></span>
+                                    <span><i class = "fas fa-star"></i></span>
+                                    <span><i class = "far fa-star"></i></span>
+                                </div>
+                            </div>
+                            <h5 th:text="${product.productName}" class="product-name"></h5>
+                            <p th:text="'$ '+${product.productPrice}" class="product-price"></p>
+                            <p class = "product-price"></p>
+                        </div>
+
+                        <div class = "off-info">
+                            <h2 class = "sm-title">25% off</h2>
+                        </div>
+                    </div> -->
+</section>
+	</div>
+	
+<div class="container-sm" align="right">
+		<video width="480" height="360" id="myVideo" align="right" preload="auto" autoplay muted loop  >
+  <source src="/video/FurniStyle.mp4" type="video/mp4">
+</video></div>
+		
+		
+</body>
+</html>
